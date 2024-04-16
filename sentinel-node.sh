@@ -489,7 +489,7 @@ function setup:config(){
 
   
     echo "Change RPC"
-    sed -i 's/rpc_addresses = "[^"]*"/rpc_addresses = "https:\/\/rpc.dvpn.roomit.xyz:443","https/\/rpc.sentinel.chaintools.tech:443","https:\/\/rpc-sentinel.whispernode.com:443","https://rpc.sentinel.quokkastake.io:443"' ${HOME_NODE}/.sentinelnode/config.toml
+    sed -i 's/rpc_addresses = "[^"]*"/rpc_addresses = "https:\/\/rpc.dvpn.roomit.xyz:443","https/\/rpc.sentinel.chaintools.tech:443","https:\/\/rpc-sentinel.whispernode.com:443","https://rpc.sentinel.quokkastake.io:443"/' ${HOME_NODE}/.sentinelnode/config.toml
 
  
     echo "Change RPC Timeout"
@@ -512,9 +512,9 @@ function setup:config(){
     echo "Change Remote URL"
     if [ "${KIND}" == "wireguard" ]
     then
-       sed -i 's/remote_url = "[^"]*"/remote_url = "https:\/\/'"${IP_PUBLIC}"':7777"/' ${HOME_NODE}/.sentinelnode/config.toml
+       sed -i 's/remote_url = "[^"]*"/remote_url = "https:\/\/'"${CUSTOM_URL_ENABLE}"':7777"/' ${HOME_NODE}/.sentinelnode/config.toml
     else
-        sed -i 's/remote_url = "[^"]*"/remote_url = "https:\/\/'"${IP_PUBLIC}"':7776"/' ${HOME_NODE}/.sentinelnode/config.toml
+        sed -i 's/remote_url = "[^"]*"/remote_url = "https:\/\/'"${CUSTOM_URL_ENABLE}"':7776"/' ${HOME_NODE}/.sentinelnode/config.toml
     fi
 
  
@@ -678,15 +678,18 @@ function get:informations(){
         echo -e "${GREEN}Your Config Path    :${NOCOLOR} ${RED}${HOME_NODE}/.sentinel${NOCOLOR}"
         if [ ${KIND} == "wireguard" ]
         then
-        echo -e "${GREEN}Your EndPoint Node  :${NOCOLOR} ${RED}https://"${IP_PUBLIC}":7777${NOCOLOR}"
+        echo -e "${GREEN}Your EndPoint Node  :${NOCOLOR} ${RED}https://"${CUSTOM_URL_ENABLE}":7777${NOCOLOR}"
         echo -e "${GREEN}Your Port Wireguard :${NOCOLOR} ${RED}${GET_PORT_WIREGUARD}${NOCOLOR}"
-        else
-        echo -e "${GREEN}Your EndPoint Node  :${NOCOLOR} ${RED}https://"${IP_PUBLIC}":7776${NOCOLOR}"
-        echo -e "${GREEN}Your Port Wireguard :${NOCOLOR} ${RED}${GET_PORT_V2RAY}${NOCOLOR}"
-        fi
         echo ""
         echo "Please send 50 dVPN for activation to your wallet ${WALLET_ADDRESS}"
         echo -e "restart service after sent balance with  command ${GREEN}docker restart sentinel-wireguard${NOCOLOR}"
+        else
+        echo -e "${GREEN}Your EndPoint Node  :${NOCOLOR} ${RED}https://"${CUSTOM_URL_ENABLE}":7776${NOCOLOR}"
+        echo -e "${GREEN}Your Port Wireguard :${NOCOLOR} ${RED}${GET_PORT_V2RAY}${NOCOLOR}"
+        echo ""
+        echo "Please send 50 dVPN for activation to your wallet ${WALLET_ADDRESS}"
+        echo -e "restart service after sent balance with  command ${GREEN}docker restart sentinel-v2ray${NOCOLOR}"
+        fi
     }
     if [ "${WALLET_IMPORT_ENABLE}" == "false" ] || [ "${WALLET_IMPORT_ENABLE}" == "False" ] || [ "${WALLET_IMPORT_ENABLE}" == "FALSE" ]
     then
@@ -731,6 +734,9 @@ function ask:config(){
 
     read -p "Enable wallet import? (true/false, default: false): " WALLET_IMPORT_ENABLE_INPUT
     WALLET_IMPORT_ENABLE=${WALLET_IMPORT_ENABLE_INPUT:-"false"}
+
+    read -p "Custom remote URL? (true/false, default: false): " CUSTOM_URL_ENABLE_INPUT
+    CUSTOM_URL_ENABLE=${CUSTOM_URL_ENABLE_INPUT:-${IP_PUBLIC}}
 }
 
 
