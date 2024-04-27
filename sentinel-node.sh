@@ -741,13 +741,13 @@ function ask:config(){
     read -p "Enter Moniker (default: DVPN SENTINEL): " MONIKER_INPUT
     MONIKER=${MONIKER_INPUT:-"DVPN SENTINEL"}
 
-    read -p "Enable wallet import? (true/false, default: false): " WALLET_IMPORT_ENABLE_INPUT
+    read -p "Enable wallet import? (input your mnemonic or leave it empty): " WALLET_IMPORT_ENABLE_INPUT
     WALLET_IMPORT_ENABLE=${WALLET_IMPORT_ENABLE_INPUT:-"false"}
     
     read -p "Is it Residential ? (true/false, default: false): " IP_TYPE_INPUT
     ip_type=${IP_TYPE_INPUT:-"false"}
     
-    read -p "Custom remote URL? ( if no will using this IP ${IP_PUBLIC}): " CUSTOM_URL_ENABLE_INPUT
+    read -p "Custom remote URL? ( if no will using this IP $IP_PUBLIC): " CUSTOM_URL_ENABLE_INPUT
     CUSTOM_URL_ENABLE=${CUSTOM_URL_ENABLE_INPUT:-${IP_PUBLIC}}
 }
 
