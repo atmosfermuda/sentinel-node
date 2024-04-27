@@ -489,18 +489,19 @@ function setup:config(){
 
   
     echo "Change RPC"
-    sed -i 's/rpc_addresses = "[^"]*"/rpc_addresses = "https:\/\/rpc.dvpn.roomit.xyz:443","https/\/rpc.sentinel.chaintools.tech:443","https:\/\/rpc-sentinel.whispernode.com:443","https://rpc.sentinel.quokkastake.io:443"/' ${HOME_NODE}/.sentinelnode/config.toml
+    sed -i -e 's|^rpc_addresses *=.*|rpc_addresses = "https://rpc.na.sentinel.atmosfermuda.com:443,https://sentinel-rpc.publicnode.com:443,https://rpc.ap.sentinel.atmosfermuda.com:443,https://rpc.eu.sentinel.atmosfermuda.com:443,https://rpc.dvpn.roomit.xyz:443,https://sentinel-rpc.validatornode.com:443,https://sentinel-rpc.badgerbite.io:443"|' ${HOME_NODE}/.sentinelnode/config.toml
 
  
     echo "Change RPC Timeout"
-    sed -i 's/rpc_query_timeout = [0-9]*/rpc_query_timeout = 15/' ${HOME_NODE}/.sentinelnode/config.toml
-    
+    sed -i -e 's|^rpc_query_timeout *=.*|rpc_query_timeout = 30|' ${HOME_NODE}/.sentinelnode/config.toml
+    sed -i -e 's|^rpc_tx_timeout *=.*|rpc_tx_timeout = 45|' ${HOME_NODE}/.sentinelnode/config.toml
  
+
     echo "Change IP Public | ${IP_PUBLIC}"
     sed -i 's/ipv4_address = "[^"]*"/ipv4_address = "'${IP_PUBLIC}'"/' ${HOME_NODE}/.sentinelnode/config.toml
 
 
-    echo "Change API"
+    echo "Change API Port"
     if [ "${KIND}" == "wireguard" ]
     then
       sed -i 's/listen_on = "[^"]*"/listen_on = "0.0.0.0:7777"/' ${HOME_NODE}/.sentinelnode/config.toml
@@ -521,10 +522,18 @@ function setup:config(){
     echo "Set Moniker Node | ${MONIKER}"
     sed -i 's/moniker = "[^"]*"/moniker = "'"${MONIKER}"'"/' ${HOME_NODE}/.sentinelnode/config.toml
 
-    echo "Update GAS"
-    sed -i -e 's|^gigabyte_prices *=.*|gigabyte_prices = "52573ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,9204ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1180852ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,122740ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,15342624udvpn"|'  ${HOME_NODE}/.sentinelnode/config.toml 
-    sed -i -e 's|^hourly_prices *=.*|hourly_prices = "18480ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,770ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1871892ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,18897ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,4160000udvpn"|' ${HOME_NODE}/.sentinelnode/config.toml
-    
+
+    echo "Change Node Pricing"
+     if [ "${IP_TYPE_INPUT}" == "true" ] || [ "${IP_TYPE_INPUT}" == "yes" ] || [ "${IP_TYPE_INPUT}" == "y" ] || [ "${IP_TYPE_INPUT}" == "Y" ] || [ "${IP_TYPE_INPUT}" == "True" ] || [ "${IP_TYPE_INPUT}" == "Yes" ]
+    then
+        sed -i -e 's|^gigabyte_prices *=.*|gigabyte_prices = "52573ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,9204ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1180852ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,122740ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,15342624udvpn"|'
+        sed -i -e 's|^hourly_prices *=.*|hourly_prices = "18480ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,770ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1871892ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,18897ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,4160000udvpn"|'
+    else
+        sed -i -e 's|^gigabyte_prices *=.*|gigabyte_prices = "52573ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,9204ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1180852ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,122740ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,15342624udvpn"|'
+        sed -i -e 's|^hourly_prices *=.*|hourly_prices = "18480ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,770ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1871892ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,18897ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,10000000udvpn"|'
+    fi
+
+
     echo "Update Kind Service"
     sed -i 's/type = "[^"]*"/type = "'"${KIND}"'"/' ${HOME_NODE}/.sentinelnode/config.toml
 
@@ -734,8 +743,11 @@ function ask:config(){
 
     read -p "Enable wallet import? (true/false, default: false): " WALLET_IMPORT_ENABLE_INPUT
     WALLET_IMPORT_ENABLE=${WALLET_IMPORT_ENABLE_INPUT:-"false"}
-
-    read -p "Custom remote URL? (true/false, default: false): " CUSTOM_URL_ENABLE_INPUT
+    
+    read -p "Is it Residential ? (true/false, default: false): " IP_TYPE_INPUT
+    ip_type=${IP_TYPE_INPUT:-"false"}
+    
+    read -p "Custom remote URL? ( if no will using this IP ${IP_PUBLIC}): " CUSTOM_URL_ENABLE_INPUT
     CUSTOM_URL_ENABLE=${CUSTOM_URL_ENABLE_INPUT:-${IP_PUBLIC}}
 }
 
