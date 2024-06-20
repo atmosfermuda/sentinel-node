@@ -526,11 +526,11 @@ function setup:config(){
     echo "Change Node Pricing"
      if [ "${IP_TYPE_INPUT}" == "true" ] || [ "${IP_TYPE_INPUT}" == "yes" ] || [ "${IP_TYPE_INPUT}" == "y" ] || [ "${IP_TYPE_INPUT}" == "Y" ] || [ "${IP_TYPE_INPUT}" == "True" ] || [ "${IP_TYPE_INPUT}" == "Yes" ]
     then
-        sed -i -e 's|^gigabyte_prices *=.*|gigabyte_prices = "52573ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,9204ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1180852ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,122740ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,15342624udvpn"|'
-        sed -i -e 's|^hourly_prices *=.*|hourly_prices = "18480ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,770ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1871892ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,18897ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,10000000udvpn"|'
+        sed -i -e 's|^gigabyte_prices *=.*|gigabyte_prices = "52573ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,9204ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1180852ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,122740ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,15342624udvpn"|' ${HOME_NODE}/.sentinelnode/config.toml
+        sed -i -e 's|^hourly_prices *=.*|hourly_prices = "18480ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,770ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1871892ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,18897ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,10000000udvpn"|' ${HOME_NODE}/.sentinelnode/config.toml
     else
-        sed -i -e 's|^gigabyte_prices *=.*|gigabyte_prices = "52573ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,9204ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1180852ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,122740ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,15342624udvpn"|'
-        sed -i -e 's|^hourly_prices *=.*|hourly_prices = "18480ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,770ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1871892ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,18897ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,4160000udvpn"|'
+        sed -i -e 's|^gigabyte_prices *=.*|gigabyte_prices = "52573ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,9204ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1180852ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,122740ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,15342624udvpn"|' ${HOME_NODE}/.sentinelnode/config.toml
+        sed -i -e 's|^hourly_prices *=.*|hourly_prices = "18480ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8,770ibc/A8C2D23A1E6F95DA4E48BA349667E322BD7A6C996D8A4AAE8BA72E190F3D1477,1871892ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783,18897ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518,4160000udvpn"|' ${HOME_NODE}/.sentinelnode/config.toml
     fi
 
 
@@ -658,7 +658,7 @@ function wallet:creation(){
                                             --interactive \
                                             --tty \
                                             --volume '${HOME_NODE}'/.sentinelnode:/root/.sentinelnode \
-                                            sentinel-dvpn-node process keys add' > /tmp/wallet.txt
+                                            sentinel-dvpn-node process keys add' > ${HOME_NODE}/.sentinelnode/wallet.txt
     fi
 }
 
@@ -673,13 +673,13 @@ function get:informations(){
         then
         echo "Save your Seeds and Dont Lose, Your seed is your asset"
         echo -e "${GREEN}SEED:${NOCOLOR}"
-        SEED_KEY=$(cat /tmp/wallet.txt | grep -v "^*" | head -n1)
+        SEED_KEY=$(cat ${HOME_NODE}/.sentinelnode/wallet.txt | grep -v "^*" | head -n1)
         echo -e "${RED}${SEED_KEY}${NOCOLOR}"
         fi
         echo ""
-        NODE_ADDRESS=$( cat /tmp/wallet.txt | grep operator | awk '{print $2}')
-        WALLET_ADDRESS=$( cat /tmp/wallet.txt | grep operator | awk '{print $3}')
-        WALLET_NAME=$( cat /tmp/wallet.txt | grep operator | awk '{print $1}')
+        NODE_ADDRESS=$( cat ${HOME_NODE}/.sentinelnode/wallet.txt | grep operator | awk '{print $2}')
+        WALLET_ADDRESS=$( cat ${HOME_NODE}/.sentinelnode/wallet.txt | grep operator | awk '{print $3}')
+        WALLET_NAME=$( cat ${HOME_NODE}/.sentinelnode/wallet.txt | grep operator | awk '{print $1}')
         echo -e "${GREEN}Your Node Address   :${NOCOLOR} ${RED}${NODE_ADDRESS}${NOCOLOR}"
         echo -e "${GREEN}Your Wallet Name    :${NOCOLOR} ${RED}${WALLET_NAME}${NOCOLOR}"
         echo -e "${GREEN}Your Wallet Address :${NOCOLOR} ${RED}${WALLET_ADDRESS}${NOCOLOR}"
@@ -707,7 +707,7 @@ function get:informations(){
         sudo -u ${USER_SENTINEL} bash -c 'docker run  \
                                             --interactive \
                                             --tty \
-                                            sentinel-dvpn-node process keys list' > /tmp/wallet.txt
+                                            sentinel-dvpn-node process keys list' > ${HOME_NODE}/.sentinelnode/wallet.txt
        get:informations:messages;
     fi
 }
@@ -747,7 +747,7 @@ function ask:config(){
     read -p "Is it Residential ? (true/false, default: false): " IP_TYPE_INPUT
     ip_type=${IP_TYPE_INPUT:-"false"}
     
-    read -p "Custom remote URL? ( if no will using this IP $IP_PUBLIC): " CUSTOM_URL_ENABLE_INPUT
+    read -p "Custom remote URL? ( if no will using this IP ${IP_PUBLIC}): " CUSTOM_URL_ENABLE_INPUT
     CUSTOM_URL_ENABLE=${CUSTOM_URL_ENABLE_INPUT:-${IP_PUBLIC}}
 }
 
